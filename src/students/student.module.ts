@@ -10,5 +10,6 @@ import { StudentService } from './student.service';
   ],
   controllers: [StudentController],
   providers: [StudentService],
+  exports: [StudentService, MongooseModule],
 })
 export class StudentModule {}

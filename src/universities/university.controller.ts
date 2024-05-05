@@ -1,7 +1,16 @@
-import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { University } from './university.schema';
 import { UniversityService } from './university.service';
 import { CreateUniversityDto } from './dto/create-university.dto';
+import { Types } from 'mongoose';
 
 @Controller('universities')
 export class UniversityController {
@@ -21,5 +30,11 @@ export class UniversityController {
   ): Promise<University> {
     this.logger.log('UniversityController.create');
     return this.universityService.create(createUniversityDto);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: Types.ObjectId): Promise<University> {
+    this.logger.log('UniversityController delete');
+    return this.universityService.delete(id);
   }
 }
