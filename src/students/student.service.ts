@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Student } from './student.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateStudentDto } from './dto/create-student.dto';
 
 @Injectable()
@@ -17,5 +17,9 @@ export class StudentService {
 
   async findAll(): Promise<Student[]> {
     return this.studentModel.find().exec();
+  }
+
+  async delete(id: Types.ObjectId): Promise<Student> {
+    return this.studentModel.findByIdAndDelete({ _id: id }).exec();
   }
 }
